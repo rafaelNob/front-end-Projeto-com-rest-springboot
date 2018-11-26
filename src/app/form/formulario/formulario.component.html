@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-8 col-sm-12">
+
+   
+       <form #clienteForm ="ngForm" (ngSubmit)="criar(clienteForm)"> 
+
+        <div class="form-group">
+          <label for="nomeCliente">Nome:</label>
+          <input class="form-control" required minlength="10" id="nomeCliente" name="nome" placeholder="Seu nome"
+            [(ngModel)]="newCliente.nomeCliente">
+
+        </div>
+        <div class="form-group">
+          <label for="valor">Valor</label>
+          <input min="1" max="1000" step="any" required [(ngModel)]="newCliente.valor" name="valor" type="number" class="form-control" id="valor"
+            placeholder="valor">
+        </div> 
+       
+         
+        <div class="row">
+          <div class="col-md-7">
+            <div class="form-group col-md-4">
+              <label for="risco">Risco</label>
+             
+              <select   id="inputState" name="risco" class="form-control" [(ngModel)]="cliente.risco" >
+                <option selected value=""> SELECIONE</option>
+                <option [value]="risco" *ngFor="let risco of riscos">{{risco}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button type="submit" [disabled]="!clienteForm.valid" class="btn btn-primary">Enviar</button>
+      </form>
+  </div>
+</div>
+
+<div class="row" style="margin-top:10px;">
+  <div class="col-md-12">
+    <table class="table table-sm table-dark">
+      <thead>
+        <tr scope="row">
+          <th scope="col">Nome</th>
+          <th scope="col">Valor</th>
+          <th scope="col">Valor Total</th>
+          <th scope="col"> Risco</th>
+          <th scope="col" colspan="2"> Ação</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let item of cliente" scope="row">
+
+          <td>{{item.nomeCliente}}</td>
+          <td> {{item.valor}}</td>
+          <td> {{item.valorTotal}}</td>
+          <td>{{item.risco}}</td>
+ 
+          <td><button class="btn btn-danger" (click)="excluir(item)">Excluir</button></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
